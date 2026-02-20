@@ -14,6 +14,12 @@ class Interpreter:
         second_val = self.stack.pop()
         result = first_val + second_val
         self.stack.append(result)
+    
+    def SUBSTRACT_TWO_VALUES(self):
+        first_val = self.stack.pop()
+        second_val = self.stack.pop()
+        result =  second_val - first_val
+        self.stack.append(result)
 
     def PRINT_ANSWER(self):
         result = self.stack.pop()
