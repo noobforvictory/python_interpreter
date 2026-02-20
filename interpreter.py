@@ -1,6 +1,10 @@
+from ast import Pass
+
+
 class Interpreter:
     def __init__(self):
         self.stack = []
+        self.environment = {}
 
     def LOAD_VALUE(self, number):
         self.stack.append(number)
@@ -15,14 +19,30 @@ class Interpreter:
         result = self.stack.pop()
         print(result)
 
+    def STORE_NAME(self, name):
+        self.environment[name] = self.stack.pop()
+
+    def LOAD_NAME(self, name):
+        val = self.environment[name]
+        self.stack.append(val)
+
+    def parse_arguments(self, instruction, argument, instruction_set):
+        number = ["LOAD_VALUE"]
+        variable = ["STORE_NAME", "LOAD_NAME"]
+
+        if instruction in number:
+            return instruction_set["numbers"][argument]
+        elif instruction in variable:
+            return instruction_set["names"][argument]
+
     def run_code(self, instruction_set):
         instructions = instruction_set["instructions"]
-        numbers = instruction_set["numbers"]
 
         for instruction, argument in instructions:
-            if instruction == "LOAD_VALUE":
-                self.LOAD_VALUE(numbers[argument])
-            elif instruction == "ADD_TWO_VALUES":
-                self.ADD_TWO_VALUES()
-            elif instruction == "PRINT_ANSWER":
-                self.PRINT_ANSWER()
+            argument = self.parse_arguments(instruction, argument, instruction_set)
+            bytecode_method = getattr(self, instruction)
+
+            if not argument:
+                bytecode_method()
+            else:
+                bytecode_method(argument)
