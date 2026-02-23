@@ -5,6 +5,7 @@ class Interpreter:
     def __init__(self):
         self.stack = []
         self.environment = {}
+        self.answer = ""
 
     def LOAD_VALUE(self, number):
         self.stack.append(number)
@@ -34,14 +35,15 @@ class Interpreter:
         self.stack.append(result)
 
     def PRINT_ANSWER(self):
-        result = self.stack.pop()
-        print(result)
+        self.answer = self.stack.pop()
+        print(self.answer)
 
     def STORE_NAME(self, name):
         self.environment[name] = self.stack.pop()
 
     def LOAD_NAME(self, name):
         val = self.environment[name]
+        self.environment.pop(name)
         self.stack.append(val)
 
     def parse_arguments(self, instruction, argument, instruction_set):
@@ -64,3 +66,7 @@ class Interpreter:
                 bytecode_method()
             else:
                 bytecode_method(argument)
+
+        answer = str(self.answer)
+        self.answer = ""
+        return answer
