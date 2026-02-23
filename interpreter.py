@@ -21,6 +21,18 @@ class Interpreter:
         result =  second_val - first_val
         self.stack.append(result)
 
+    def MULTIPLY_TWO_VALUES(self):
+        first_val = self.stack.pop()
+        second_value = self.stack.pop()
+        result = first_val*second_value
+        self.stack.append(result)
+
+    def DIVIDE_TWO_VALUE(self):
+        first_value = self.stack.pop()
+        second_value = self.stack.pop()
+        result = first_value/second_value
+        self.stack.append(result)
+
     def PRINT_ANSWER(self):
         result = self.stack.pop()
         print(result)
