@@ -31,7 +31,7 @@ class Interpreter:
     def DIVIDE_TWO_VALUE(self):
         first_value = self.stack.pop()
         second_value = self.stack.pop()
-        result = first_value/second_value
+        result = second_value/first_value
         self.stack.append(result)
 
     def PRINT_ANSWER(self):
