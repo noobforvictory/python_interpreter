@@ -19,4 +19,6 @@ Essential Capabilities & Features for toy language
     -Control Flow: If-else statements and while loops.
     -Variables: Assignment and reassignment of data.
     -Functions: Ability to define and call functions, preferably with recursion.
-    -Input/Output: Simple print functionality to display results. 
+    -Input/Output: Simple print functionality to display results.
+
+Reach Goal - Closures
